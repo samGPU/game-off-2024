@@ -2,6 +2,13 @@
   "name": "game-off-2024",
   "private": true,
   "version": "0.0.0",
+  "contributors": [
+    {
+      "name": "Sam Buckley",
+      "email": "samgpu@proton.me",
+      "url": "http://www.samgpu.xyz"
+    }
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
