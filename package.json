@@ -1,7 +1,6 @@
 {
-  "name": "game-off-2024",
-  "private": true,
-  "version": "0.0.0",
+  "name": "kooped-in",
+  "version": "0.0.1",
   "contributors": [
     {
       "name": "Sam Buckley",
@@ -14,13 +13,56 @@
       "url": "https://www.woollymammothstudio.co.uk"
     }
   ],
+  "license": "MIT",
+  "description": "GitHub Game Off 2024 entry by team Check the Sheet.",
+  "keywords": [
+    "game-off",
+    "game",
+    "react",
+    "three",
+    "threejs",
+    "react-three-fiber"
+  ],
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
   "type": "module",
+  "types": "./dist/Ecctrl.d.ts",
+  "main": "./dist/Ecctrl.cjs",
+  "module": "./dist/Ecctrl.js",
+  "exports": {
+    "types": "./dist/Ecctrl.d.ts",
+    "require": "./dist/Ecctrl.cjs",
+    "import": "./dist/Ecctrl.js"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@react-three/drei": "^9.92.7",
+    "@react-three/fiber": "^8.15.13",
+    "@types/react": "^18.2.28",
+    "@types/react-dom": "^18.2.8",
+    "@vitejs/plugin-react": "^4.1.0",
+    "r3f-perf": "^7.1.2",
+    "typescript": "^5.2.2",
+    "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "@react-spring/three": "^9.7.3",
+    "leva": "^0.9.34",
+    "zustand": "^4.4.7"
+  },
+  "peerDependencies": {
+    "@react-three/drei": ">=9.0",
+    "@react-three/fiber": ">=8.0",
+    "@react-three/rapier": ">=1.5.0",
+    "react": ">=18",
+    "react-dom": ">=18.0",
+    "three": ">=0.153"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && tsc",
     "preview": "vite preview"
-  },
-  "devDependencies": {
-    "vite": "^5.4.10"
   }
 }
