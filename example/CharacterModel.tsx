@@ -39,17 +39,9 @@ export default function CharacterModel(props: CharacterModelProps) {
   let leftHand: THREE.Object3D = null;
   let mugModel: THREE.Object3D = null;
 
-  /**
-   * Debug settings
-   */
-  const { mainColor, outlineColor, trailColor } = useControls(
-    "Character Model",
-    {
-      mainColor: "mediumslateblue",
-      outlineColor: "black",
-      trailColor: "violet",
-    }
-  );
+  const mainColor = "mediumslateblue"
+  const outlineColor = "black"
+  const trailColor = "violet"
 
   /**
    * Prepare replacing materials

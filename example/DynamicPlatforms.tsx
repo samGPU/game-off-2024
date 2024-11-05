@@ -13,6 +13,8 @@ export default function DynamicPlatforms() {
   const sideMovePlatformRef = useRef<RapierRigidBody>();
   const verticalMovePlatformRef = useRef<RapierRigidBody>();
   const rotatePlatformRef = useRef<RapierRigidBody>();
+  const rotatePlatformRef2 = useRef<RapierRigidBody>();
+  const rotatePlatformRef3 = useRef<RapierRigidBody>();
   const rotationDrumRef = useRef<RapierRigidBody>();
 
   // Initializ animation settings
@@ -44,7 +46,13 @@ export default function DynamicPlatforms() {
 
     // Rotate platform
     rotatePlatformRef.current?.setNextKinematicRotation(
-      quaternionRotation.setFromAxisAngle(yRotationAxies, time * 0.5)
+      quaternionRotation.setFromAxisAngle(yRotationAxies, time * 2.5)
+    );
+    rotatePlatformRef2.current?.setNextKinematicRotation(
+      quaternionRotation.setFromAxisAngle(yRotationAxies, time * -2.5)
+    );
+    rotatePlatformRef3.current?.setNextKinematicRotation(
+      quaternionRotation.setFromAxisAngle(yRotationAxies, time * 2.5)
     );
 
     // Rotate drum
@@ -104,19 +112,38 @@ export default function DynamicPlatforms() {
       {/* Rotating Platform */}
       <RigidBody
         type="kinematicPosition"
-        position={[-25, -0.5, -10]}
+        position={[-22.5, 1, 11]}
         ref={rotatePlatformRef}
         colliders={false}
       >
-        <Text
-          scale={0.5}
-          color="white"
-          maxWidth={10}
-          textAlign="center"
-          position={[0, 2.5, 0]}
-        >
-          Kinematic Rotating Platform
-        </Text>
+        <CuboidCollider args={[2.5, 0.1, 2.5]} />
+        <mesh receiveShadow castShadow>
+          <boxGeometry args={[5, 0.2, 5]} />
+          <meshStandardMaterial color={"lightgray"} />
+        </mesh>
+      </RigidBody>
+
+      {/* Rotating Platform 2*/}
+      <RigidBody
+        type="kinematicPosition"
+        position={[-27.5, 1, 11]}
+        ref={rotatePlatformRef2}
+        colliders={false}
+      >
+        <CuboidCollider args={[2.5, 0.1, 2.5]} />
+        <mesh receiveShadow castShadow>
+          <boxGeometry args={[5, 0.2, 5]} />
+          <meshStandardMaterial color={"lightgray"} />
+        </mesh>
+      </RigidBody>
+
+      {/* Rotating Platform 3*/}
+      <RigidBody
+        type="kinematicPosition"
+        position={[-32.5, 1, 11]}
+        ref={rotatePlatformRef3}
+        colliders={false}
+      >
         <CuboidCollider args={[2.5, 0.1, 2.5]} />
         <mesh receiveShadow castShadow>
           <boxGeometry args={[5, 0.2, 5]} />

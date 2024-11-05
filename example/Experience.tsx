@@ -55,7 +55,7 @@ export default function Experience() {
         <KeyboardControls map={keyboardMap}>
           {/* Character Control */}
           <Ecctrl
-            debug
+            // debug
             animated
             followLight
             springK={2}
