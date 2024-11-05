@@ -68,7 +68,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc",
+    "build": "vite build -c vercelVite.config.js",
     "preview": "vite preview",
     "buildPreview": "vite build -c vercelVite.config.js"
   }
