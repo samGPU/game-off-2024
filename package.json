@@ -11,6 +11,12 @@
       "name": "Oliver Potter",
       "email": "oliverxpotter@hotmail.co.uk",
       "url": "https://www.woollymammothstudio.co.uk"
+    },
+    {
+      "name": "Daniel Jones"
+    },
+    {
+      "name": "Richard Ip"
     }
   ],
   "license": "MIT",
@@ -63,6 +69,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "buildPreview": "vite build -c vercelVite.config.js"
   }
 }
