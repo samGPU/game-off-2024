@@ -565,6 +565,7 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
   const { pivot, followCam, cameraCollisionDetect, joystickCamMove } =
     useFollowCam(cameraSetups);
   const pivotPosition: THREE.Vector3 = useMemo(() => new THREE.Vector3(), []);
+  const pivotFocusPoint: THREE.Vector3 = useMemo(() => new THREE.Vector3(10, 0, 0), []);
   const pivotXAxis: THREE.Vector3 = useMemo(() => new THREE.Vector3(1, 0, 0), []);
   const pivotYAxis: THREE.Vector3 = useMemo(() => new THREE.Vector3(0, 1, 0), []);
   const pivotZAxis: THREE.Vector3 = useMemo(() => new THREE.Vector3(0, 0, 1), []);
@@ -582,6 +583,8 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
   const dragAngForce: THREE.Vector3 = useMemo(() => new THREE.Vector3(), []);
   const wantToMoveVel: THREE.Vector3 = useMemo(() => new THREE.Vector3(), []);
   const rejectVel: THREE.Vector3 = useMemo(() => new THREE.Vector3(), []);
+
+  let unhookCamera: Boolean = useMemo(() => false, []);
 
   /**
    * Floating Ray setup
@@ -911,6 +914,20 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
         }
       );
 
+      subscribeKeys(
+        (state) => state.focusCamera,
+        (value) => {
+          if (value) {
+            pivotPosition.set(
+              pivotFocusPoint.x,
+              pivotFocusPoint.y,
+              pivotFocusPoint.z
+            )
+            unhookCamera = !unhookCamera;
+          }
+        }
+      );
+
       return () => {
         unSubscribeAction1();
         unSubscribeAction2();
@@ -1036,10 +1053,12 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
     pivotXAxis.applyQuaternion(pivot.quaternion)
     pivotZAxis.set(0, 0, 1)
     pivotZAxis.applyQuaternion(pivot.quaternion)
-    pivotPosition.copy(currentPos)
-      .addScaledVector(pivotXAxis, camTargetPos.x)
-      .addScaledVector(pivotYAxis, camTargetPos.y + (capsuleHalfHeight + capsuleRadius / 2))
-      .addScaledVector(pivotZAxis, camTargetPos.z)
+    if(!unhookCamera) {
+      pivotPosition.copy(currentPos)
+        .addScaledVector(pivotXAxis, camTargetPos.x)
+        .addScaledVector(pivotYAxis, camTargetPos.y + (capsuleHalfHeight + capsuleRadius / 2))
+        .addScaledVector(pivotZAxis, camTargetPos.z)
+    }
     pivot.position.lerp(pivotPosition, 1 - Math.exp(-camFollowMult * delta));
 
     if (!disableFollowCam) {

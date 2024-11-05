@@ -2,8 +2,6 @@ import {
   useAnimations,
   useGLTF,
   useTexture,
-  Trail,
-  SpriteAnimator,
 } from "@react-three/drei";
 import { useControls } from "leva";
 import { Suspense, useEffect, useRef, useMemo, useState } from "react";

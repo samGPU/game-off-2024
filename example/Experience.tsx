@@ -28,15 +28,6 @@ export default function Experience() {
   }, []);
 
   /**
-   * Debug settings
-   */
-  // const { physics, disableControl, disableFollowCam } = useControls("World Settings", {
-  //   physics: false,
-  //   disableControl: false,
-  //   disableFollowCam: false,
-  // });
-
-  /**
    * Keyboard control preset
    */
   const keyboardMap = [
@@ -50,13 +41,12 @@ export default function Experience() {
     { name: "action2", keys: ["2"] },
     { name: "action3", keys: ["3"] },
     { name: "action4", keys: ["KeyF"] },
+    { name: "focusCamera", keys: ["KeyC"] },
   ];
 
   return (
     <>
       <Perf position="top-left" minimal />
-
-   
 
       <Lights />
 
