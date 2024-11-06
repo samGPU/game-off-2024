@@ -14,6 +14,7 @@ import * as THREE from "three";
 import { useControls } from "leva";
 import { useFollowCam } from "./hooks/useFollowCam";
 import { useGame } from "./stores/useGame";
+import stateManager from "./stores/stateManager";
 import { useJoystickControls } from "./stores/useJoystickControls";
 import { QueryFilterFlags } from "@dimforge/rapier3d-compat";
 import type {
@@ -130,6 +131,13 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
   const characterModelRef = useRef<THREE.Group>();
   const characterModelIndicator: THREE.Object3D = useMemo(() => new THREE.Object3D(), [])
   const defaultControllerKeys = { forward: 12, backward: 13, leftward: 14, rightward: 15, jump: 2, action1: 11, action2: 3, action3: 1, action4: 0 }
+
+  /**
+   * State Management
+   */
+  const start = stateManager((state) => state.start)
+  const end = stateManager((state) => state.end)
+  const restart = stateManager((state) => state.restart)
 
   /**
    * Mode setup
@@ -914,7 +922,7 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
         }
       );
 
-      subscribeKeys(
+      const unSubcribeCameraUnhook = subscribeKeys(
         (state) => state.focusCamera,
         (value) => {
           if (value) {
@@ -924,15 +932,24 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
               pivotFocusPoint.z
             )
             unhookCamera = !unhookCamera;
+            end();
           }
         }
       );
+
+      const unSubscribeAny = subscribeKeys(
+        () => {
+          start();
+        }
+      )
 
       return () => {
         unSubscribeAction1();
         unSubscribeAction2();
         unSubscribeAction3();
         unSubscribeAction4();
+        unSubcribeCameraUnhook();
+        unSubscribeAny();
       };
     });
   }

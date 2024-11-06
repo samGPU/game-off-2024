@@ -13,8 +13,18 @@ import DynamicPlatforms from "./DynamicPlatforms";
 import { useControls } from "leva";
 import CharacterModel from "./CharacterModel";
 import React, { useEffect, useState } from "react";
+import stateManager from "../src/stores/stateManager";
 
 export default function Experience() {
+
+  /**
+   * State manager
+   */
+  const restart = stateManager((state) => state.restart)
+
+  // console.log(testState)
+
+
   /**
    * Delay physics activate
    */
@@ -24,7 +34,20 @@ export default function Experience() {
       setPausedPhysics(false);
     }, 500);
 
-    return () => clearTimeout(timeout);
+    const unsubscribeState = stateManager.subscribe(
+      (state) => state.phase,
+      (value) => {
+        console.log('phase changes to', value)
+        // if(value === 'ended') {
+        //   restart()
+        // }
+      }
+    )
+
+    return () => {
+      unsubscribeState()
+      clearTimeout(timeout)
+    };
   }, []);
 
   /**
