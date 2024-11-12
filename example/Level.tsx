@@ -20,7 +20,7 @@ export default function Level() {
 
     return (
         <group position={[-40, 0, -60]}>
-            <RigidBody type="fixed" colliders="trimesh" rotation={[0, 0, 0]} scale={[2, 2, 2]}>
+            <RigidBody type="fixed" colliders="trimesh" rotation={[0, Math.PI * 0.5, 0]} scale={[2, 2, 2]}>
                 <primitive object={level.scene} />
             </RigidBody>
         </group>
