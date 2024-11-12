@@ -6,6 +6,7 @@ import Floor from "./Floor";
 import Lights from "./Lights";
 import Steps from "./Steps";
 import Slopes from "./Slopes";
+import Level from "./Level";
 import RoughPlane from "./RoughPlane";
 import RigidObjects from "./RigidObjects";
 import FloatingPlatform from "./FloatingPlatform";
@@ -101,6 +102,9 @@ export default function Experience() {
 
         {/* Slopes and stairs */}
         <Slopes />
+
+        {/* Level */}
+        <Level />
 
         {/* Small steps */}
         <Steps />
