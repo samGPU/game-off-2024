@@ -135,9 +135,9 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
   /**
    * State Management
    */
-  const start = stateManager((state) => state.start)
-  const end = stateManager((state) => state.end)
-  const restart = stateManager((state) => state.restart)
+  const setGameStateStart = stateManager((state) => state.start)
+  const setGameStateEnd = stateManager((state) => state.end)
+  const setGameStateRestart = stateManager((state) => state.restart)
 
   /**
    * Mode setup
@@ -932,14 +932,14 @@ const Ecctrl: ForwardRefRenderFunction<RapierRigidBody, EcctrlProps> = ({
               pivotFocusPoint.z
             )
             unhookCamera = !unhookCamera;
-            end();
+            setGameStateEnd();
           }
         }
       );
 
       const unSubscribeAny = subscribeKeys(
         () => {
-          start();
+          // setGameStateStart();
         }
       )
 

@@ -23,8 +23,6 @@ export default function Experience() {
    */
   const restart = stateManager((state) => state.restart)
 
-  // console.log(testState)
-
 
   /**
    * Delay physics activate

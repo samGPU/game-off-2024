@@ -2,6 +2,7 @@ import "./style.css";
 import ReactDOM from "react-dom/client";
 import { Canvas } from "@react-three/fiber";
 import Experience from "../example/Experience";
+import Interface from "./Interface";
 import { Leva } from "leva";
 import { EcctrlJoystick } from "../src/EcctrlJoystick";
 import { Suspense, useEffect, useState } from "react";
@@ -30,6 +31,7 @@ root.render(
   <>
     <Leva collapsed />
     <EcctrlJoystickControls />
+    <Interface />
     <Canvas
       shadows
       camera={{
